@@ -1,0 +1,100 @@
+- hosts: jenkins
+  become: true
+  gather_facts: yes
+  tasks:
+  
+    - name: Download long term jenkins release
+      get_url:
+        url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+        dest: /etc/yum.repos.d/jenkins.repo
+      when: ansible_distribution == 'RedHat'
+
+    - name: Download long term jenkins release
+      lineinfile:
+        path: /etc/apt/sources.list.d/jenkins.list
+        line: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+        create: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install epel release package for extra packages
+      yum:
+        name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+        state: present
+        disable_gpg_check: true
+      when: ansible_distribution == 'RedHat'
+
+    - name: Execute curl command
+      shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+      when: ansible_pkg_mgr == 'apt'
+        
+    - name: Import jenkins key from url
+      rpm_key:
+        key: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+        state: present
+      when: ansible_distribution == 'RedHat'
+
+    - name: Import jenkins key from url
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Update package repository
+      apt:
+       update_cache: yes
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Update package repository
+      yum:
+       update_cache: yes
+      when: ansible_distribution == 'RedHat'
+
+    - name: Install java
+      yum:
+        name: java-11-openjdk-devel
+        state: present
+      when: ansible_distribution == 'RedHat'
+
+    - name: Install java
+      apt:
+        name: openjdk-11-jdk
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Install jenkins
+      yum:
+        name: jenkins
+        state: latest
+        skip_broken: yes
+      when: ansible_distribution == 'RedHat'
+
+    - name: Install jenkins
+      apt:
+        name: jenkins
+        state: latest
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: Start jenkins
+      service:
+        name: jenkins
+        state: started
+
+    - name: Enable jenkins
+      systemd:
+        name: jenkins
+        enabled: true
+
+    - name: Sleep for 30 seconds and continue to play
+      wait_for:
+        delay: 30
+        port: 8080
+
+    - name: Initialize jenkins password
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      changed_when: false
+      register: result
+
+    - name: Print jenkins password
+      debug:
+        var: result.stdout
+
