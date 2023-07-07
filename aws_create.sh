@@ -2,7 +2,7 @@
 
 progress_bar() {
   duration="$1"
-  bar_length=45
+  bar_length=60
   sleep_duration=$(echo "$duration / $bar_length" | bc)
 
   i=0
@@ -47,20 +47,21 @@ INSTANCE_ID=$(aws ec2 run-instances --image-id $AMI_ID --count $COUNTS --instanc
 
 echo "Creating $INSTANCENAME server"
 
-progress_bar 45
+progress_bar 60
 
 echo "$INSTANCENAME Server Created Successfully!"
 
 PUBLICIP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[].Instances[].PublicIpAddress' | cut -d "[" -f2 | cut -d "]" -f1 | tr -d '" ')
 
-PCLINE="[$INSTANCENAME]\n\n$PUBLICIP ansible_user=ec2-user ansible_ssh_private_key_file=/home/ansible/filinta.pem"
+PCLINE="[$INSTANCENAME]
+$PUBLICIP ansible_user=ec2-user ansible_ssh_private_key_file=/home/ansible/filinta.pem"
 
 PHLINE="[$INSTANCENAME]\n\n$PUBLICIP ansible_user=ec2-user ansible_ssh_private_key_file=filinta.pem"
 
 PATH="/root/.jenkins/workspace/$INSTANCENAME"
 
 if [ "$(echo "$PWD")" = "$PATH" ]; then
-  echo "$PCLINE" > /etc/ansible/hosts
+  echo "$PCLINE" > hosts
 else
   echo "$PHLINE" > hosts
 fi
