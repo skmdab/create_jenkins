@@ -2,7 +2,7 @@
 
 progress_bar() {
   duration="$1"
-  bar_length=60
+  bar_length=75
   sleep_duration=$(echo "$duration / $bar_length" | bc)
 
   i=0
@@ -47,7 +47,7 @@ INSTANCE_ID=$(aws ec2 run-instances --image-id $AMI_ID --count $COUNTS --instanc
 
 echo "Creating $INSTANCENAME server"
 
-progress_bar 60
+progress_bar 75
 
 echo "$INSTANCENAME Server Created Successfully!"
 
