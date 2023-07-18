@@ -1,24 +1,46 @@
 # Create Jenkins
 
-This repository contains scripts and configurations to deployment of Jenkins Instance on AWS.
+This repository contains scripts and configurations for deploying a Jenkins instance on AWS.
 
 ## Prerequisites
 
 Before you can use these scripts, ensure that you have the following:
 
 - Linux or macOS environment
-- AWSCLI installed and configured with crredentials
-- Docker & Jenknins installed and running
+- AWS CLI installed and configured with credentials
+- Docker and Jenkins installed and running
 - Git installed
 - Ansible installed and running
 - Internet connectivity to download Jenkins Docker image
-- Jenkins user must be part of Docker group
+- The Jenkins user must be part of the Docker group
 
+Please make the following modifications in the `aws_create` script according to your environment:
+- VPC-ID
+- Availability Zone (AZ)
+- Security groups
+- AMI-ID
+- Subnets
+- PEM file name
 
-Modify VPC-ID, AZ, Security groups, AMI-Id, Subnets & PEM file name in aws_create script according to yours.
+## Create Jenkins Job with a Pipeline and choose "Pipeline Script from SCM".
 
-## Create Jenkins Job with pipeline and choose Pipeline Script from SCM.
-
-To Do's in Jenkins
+To-do's in Jenkins:
 ------------------------------------------
-Add AWS pem file in jenkins credentials with ID "pemfile"
+1. Add the AWS PEM file in Jenkins credentials with the ID "pemfile".
+
+Please ensure you have completed the above steps before proceeding.
+
+## Contributing
+
+Contributions are welcome! If you would like to contribute to this project, please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and test them thoroughly.
+4. Commit your changes and push them to your forked repository.
+5. Submit a pull request, explaining the purpose and changes of your contribution.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
