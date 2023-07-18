@@ -16,4 +16,6 @@ Before you can use these scripts, ensure that you have the following:
 
 ## Create Jenkins Job with pipeline and choose Pipeline Script from SCM.
 
-PEM files and keys must to be added in Jenkins Server
+To Do's in Jenkins
+------------------------------------------
+
