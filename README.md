@@ -16,6 +16,8 @@ Before you can use these scripts, ensure that you have the following:
 
 ## Create Jenkins Job with pipeline and choose Pipeline Script from SCM.
 
+## Modify VPC, Security groups, AMI Id, Subnets & PEM file name in aws_create script according to yours.
+
 To Do's in Jenkins
 ------------------------------------------
 Add AWS pem file in jenkins credentials with ID "pemfile"
