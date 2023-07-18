@@ -15,7 +15,7 @@ Before you can use these scripts, ensure that you have the following:
 - Jenkins user must be part of Docker group
 
 
-Modify VPC, AZ, Security groups, AMI Id, Subnets & PEM file name in aws_create script according to yours.
+Modify VPC-ID, AZ, Security groups, AMI-Id, Subnets & PEM file name in aws_create script according to yours.
 
 ## Create Jenkins Job with pipeline and choose Pipeline Script from SCM.
 
