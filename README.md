@@ -18,4 +18,4 @@ Before you can use these scripts, ensure that you have the following:
 
 To Do's in Jenkins
 ------------------------------------------
-
+Add AWS pem file in jenkins credentials with ID "pemfile"
