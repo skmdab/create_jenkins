@@ -10,7 +10,7 @@ Before you can use these scripts, ensure that you have the following:
 - AWSCLI installed and configured with crredentials
 - Docker & Jenknins installed and running
 - Git installed
-- Ansible installed
+- Ansible installed and running
 - Internet connectivity to download Jenkins Docker image
 - Jenkins user must be part of Docker group
 
