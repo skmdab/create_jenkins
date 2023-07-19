@@ -1,4 +1,4 @@
-# Create Jenkins
+# Create Jenkins <p align="right"> <a href="https://www.jenkins.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="kubernetes" width="80" height="80"/> </a> </p>
 
 This repository contains scripts and configurations for deploying a Jenkins instance on AWS.
 
